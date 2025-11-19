@@ -3,13 +3,30 @@ import React, { useState } from 'react';
 export default function EmailSignupSection() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email) {
-      setSubmitted(true);
-      setEmail('');
-      setTimeout(() => setSubmitted(false), 3000);
+      setLoading(true);
+      try {
+        const response = await fetch('https://focusup-backend.onrender.com/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        
+        if (response.ok) {
+          setSubmitted(true);
+          setEmail('');
+          setTimeout(() => setSubmitted(false), 3000);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Subscription failed. Please try again.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -34,9 +51,10 @@ export default function EmailSignupSection() {
           />
           <button
             type="submit"
-            className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition"
+            disabled={loading}
+            className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition disabled:bg-gray-400"
           >
-            Notify Me
+            {loading ? 'Submitting...' : 'Notify Me'}
           </button>
         </form>
         
