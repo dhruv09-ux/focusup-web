@@ -71,12 +71,12 @@ export default function FloatingIcons() {
         <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/30">
           <div className="bg-white rounded-xl shadow-lg p-6 m-8 max-w-sm w-full relative">
             <h2 className="text-xl font-bold text-red-600 mb-2">Contact Info</h2>
-            <ul className="mb-4">
+            <ul className="mb-4 text-left">
               <li className="text-gray-700 mb-2">
-                <strong>Email:</strong> <a href="mailto:focusup@email.com" className="text-red-600 underline">focusup@email.com</a>
+                <strong>Email:</strong> <a href="mailto:raidhruv199@gmail.com" className="text-red-600 underline">raidhruv199@gmail.com</a>
               </li>
               <li className="text-gray-700">
-                <strong>Phone:</strong> +91-99999-99999
+                <strong>Phone:</strong> <span className="text-red-600 font-medium">+91-8766272665</span>
               </li>
             </ul>
             <button
